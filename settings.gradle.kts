@@ -1,0 +1,1 @@
+rootProject.name = "com.couchbase.kotlin-couchbase-example"
