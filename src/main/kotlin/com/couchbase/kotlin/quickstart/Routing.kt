@@ -1,4 +1,4 @@
-package com.couchbase.plugins
+package com.couchbase.kotlin.quickstart
 
 import io.ktor.server.routing.*
 import io.ktor.http.*
