@@ -1,3 +1,5 @@
+import org.gradle.jvm.tasks.Jar
+
 val ktor_version: String by project
 val koin_version: String by project
 val kotlin_version: String by project
@@ -35,7 +37,18 @@ dependencies {
     implementation("io.insert-koin:koin-logger-slf4j:$koin_version")
     implementation("io.github.config4k:config4k:0.4.2")
     implementation("org.junit.jupiter:junit-jupiter:5.7.0")
+    implementation("org.reflections:reflections:0.10.2")
     implementation("dev.forst", "ktor-openapi-generator", "0.4.3")
     testImplementation("io.ktor:ktor-server-tests-jvm:$ktor_version")
     testImplementation("io.mockk:mockk:1.12.4")
+}
+
+tasks.withType<Jar> {
+  manifest {
+      attributes["Main-Class"] = "com.couchbase.kotlin.quickstart.ApplicationKt"
+  }
+  configurations["compileClasspath"].forEach { file: File ->
+      from(zipTree(file.absoluteFile))
+  }
+  duplicatesStrategy = DuplicatesStrategy.INCLUDE
 }
