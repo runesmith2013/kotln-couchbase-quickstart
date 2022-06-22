@@ -38,7 +38,7 @@ dependencies {
     implementation("io.github.config4k:config4k:0.4.2")
     implementation("org.junit.jupiter:junit-jupiter:5.7.0")
     implementation("org.reflections:reflections:0.10.2")
-    implementation("dev.forst", "ktor-openapi-generator", "0.4.3")
+    implementation("dev.forst", "ktor-openapi-generator", "0.3.3")
     testImplementation("io.ktor:ktor-server-tests-jvm:$ktor_version")
     testImplementation("io.mockk:mockk:1.12.4")
 }
