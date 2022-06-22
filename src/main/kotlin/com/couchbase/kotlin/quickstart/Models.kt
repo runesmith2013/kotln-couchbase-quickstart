@@ -4,6 +4,9 @@ import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
 import java.util.*
 
+// This class is used to represent
+// client requests to create a new 
+// profile record
 open class ProfileWithoutId(
   var firstName: String = "",
   var lastName: String = "",
@@ -12,6 +15,8 @@ open class ProfileWithoutId(
   var balance: Int = 0
 )
 
+// This class is used to represent
+// profile records
 class Profile(
   val pid: UUID = UUID.randomUUID()
 ) : ProfileWithoutId()

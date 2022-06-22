@@ -20,9 +20,11 @@ fun main(args: Array<String>): Unit = EngineMain.main(args)
 
 @ExperimentalTime
 fun Application.initialize() {
+  // to support JSON serialization
   install(ContentNegotiation) {
     jackson()
   }
+  // Open API (Swagger) UI
   install(OpenAPIGen) {
     info {
       version = "0.0.1"
@@ -38,6 +40,8 @@ fun Application.initialize() {
       call.respondRedirect("/swagger-ui/index.html?url=/openapi.json", true)
     }
   }
+
+  // Exposes application configuration as Koin bean
   fun applicationConfig():ApplicationConfig {
     return environment.config
   }
@@ -46,7 +50,9 @@ fun Application.initialize() {
     modules(module {
       singleOf(::applicationConfig)
     })
+    // database connection module
     modules(couchbaseModule)
+    // profile operations module
     modules(profileModule)
   }
 

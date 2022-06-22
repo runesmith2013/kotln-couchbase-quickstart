@@ -32,7 +32,7 @@ fun NormalOpenAPIRoute.profileRoutes() {
                     respond(service.getById(params.id))
                 }
                 throws(HttpStatusCode.BadRequest, MismatchedIdException::class) {
-                    post<ProfileRequest, Profile, Profile> { params, profile ->
+                    put<ProfileRequest, Profile, Profile> { params, profile ->
                         if (params.id != profile.pid) {
                             throw MismatchedIdException()
                         }

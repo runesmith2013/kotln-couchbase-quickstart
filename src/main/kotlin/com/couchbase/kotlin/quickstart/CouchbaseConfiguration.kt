@@ -10,6 +10,7 @@ import org.koin.dsl.module
 import kotlin.time.Duration.Companion.seconds
 import kotlin.time.ExperimentalTime
 
+// Couchbase beans
 @ExperimentalTime
 val couchbaseModule = module {
   singleOf(::CouchbaseConfiguration)
@@ -26,6 +27,7 @@ class CouchbaseConfiguration(cfg: ApplicationConfig) {
   val scope: String = cfg.propertyOrNull("couchbase.scope")?.getString() ?: "_default"
 }
 
+// Creates a cluster bean
 fun createCluster(configuration: CouchbaseConfiguration): Cluster {
   return Cluster.connect(
     connectionString = configuration.connectionString,
@@ -35,6 +37,7 @@ fun createCluster(configuration: CouchbaseConfiguration): Cluster {
 }
 
 
+// Creates a bucket bean
 @ExperimentalTime
 fun createBucket(cluster: Cluster, configuration: CouchbaseConfiguration): Bucket {
   val result : Bucket?
@@ -44,6 +47,7 @@ fun createBucket(cluster: Cluster, configuration: CouchbaseConfiguration): Bucke
   return result!!
 }
 
+// Creates a bucket scope bean
 fun createScope(bucket: Bucket, configuration: CouchbaseConfiguration): Scope {
   return bucket.scope(configuration.scope)
 }
