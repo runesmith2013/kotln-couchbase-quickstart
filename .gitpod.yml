@@ -8,7 +8,7 @@ tasks:
   command: curl -s 'https://da-demo-images.s3.amazonaws.com/runItNow_outline.png?couchbase-example=java-springboot-quickstart-repo&source=gitpod' > /dev/null
 - name: Start app
   init: ./gradlew build -x test
-  command: ./gradlew run -x test
+  command: ./gradlew run -x test &
 # exposed ports
 ports:
 - port: 8080

@@ -44,6 +44,11 @@ if ! couchbase-cli server-list -c ${CB_HOST}:${CB_PORT} -u ${CB_USER} -p ${CB_PS
         --cluster-fts-ramsize ${CB_FTS_RAMSIZE} \
         --cluster-eventing-ramsize ${CB_EVENTING_RAMSIZE} \
         --cluster-analytics-ramsize ${CB_ANALYTICS_RAMSIZE}
+
+  echo "couchbase bucket-create..."
+  couchbase-cli bucket-create -c "${CB_HOST}:${CB_PORT}" -u "${CB_USER}" -p "${CB_PSWD}" --bucket "user_profile" --bucket-type "couchbase" --bucket-ramsize "${CB_KV_RAMSIZE}" 
+
+  echo "Initialized couchbase"
 fi
 
 sleep 3
