@@ -31,6 +31,7 @@ fun Application.initialize() {
       title = "Kotlin Couchbase Example API"
       description = "Example REST API built with Kotlin Couchbase SDK"
     }
+    serveSwaggerUi = true
   }
   routing {
     get("/openapi.json") {
