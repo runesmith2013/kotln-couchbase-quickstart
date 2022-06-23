@@ -268,4 +268,4 @@ And, to run the application, use `./gradlew run`, which should create an HTTP se
 ### Project Setup Notes
 
 This project was based on the standard Ktor project.
-A full list of packages are referenced in the `build.gradle` file.
+A full list of packages is referenced in the `build.gradle` file.
