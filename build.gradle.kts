@@ -11,7 +11,7 @@ plugins {
 }
 
 group = "com.couchbase.kotlin"
-version = "0.0.1"
+version = "1.2.0"
 
 application {
     mainClass.set("com.couchbase.kotlin.quickstart.ApplicationKt")
@@ -32,15 +32,22 @@ dependencies {
     implementation("io.ktor:ktor-server-content-negotiation:$ktor_version")
     implementation("io.ktor:ktor-serialization-jackson:$ktor_version")
     implementation("ch.qos.logback:logback-classic:$logback_version")
-    implementation("com.couchbase.client:kotlin-client:1.0.1")
+    implementation("com.couchbase.client:kotlin-client:1.2.0")
     implementation("io.insert-koin:koin-ktor:$koin_version")
     implementation("io.insert-koin:koin-logger-slf4j:$koin_version")
     implementation("io.github.config4k:config4k:0.4.2")
     implementation("org.junit.jupiter:junit-jupiter:5.7.0")
     implementation("org.reflections:reflections:0.10.2")
-    implementation("dev.forst", "ktor-openapi-generator", "0.4.3")
+    implementation("dev.forst", "ktor-openapi-generator", "0.6.1")
+    implementation("io.ktor:ktor-client-serialization:$ktor_version")
+    implementation ("io.ktor:ktor-server-core:$ktor_version")
+    implementation("io.ktor:ktor-server-cors-jvm:2.3.7")
+    implementation("io.ktor:ktor-server-swagger-jvm:2.3.7")
+
     testImplementation("io.ktor:ktor-server-tests-jvm:$ktor_version")
     testImplementation("io.mockk:mockk:1.12.4")
+    testImplementation("io.ktor:ktor-server-test-host:$ktor_version")
+    testImplementation("org.jetbrains.kotlin:kotlin-test:$kotlin_version")
 }
 
 tasks.withType<Jar> {
