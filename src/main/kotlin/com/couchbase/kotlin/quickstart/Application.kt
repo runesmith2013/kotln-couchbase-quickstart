@@ -9,15 +9,11 @@ import com.papsign.ktor.openapigen.route.apiRouting
 import com.couchbase.kotlin.quickstart.models.airlineModule
 import com.couchbase.kotlin.quickstart.models.airportModule
 import com.couchbase.kotlin.quickstart.models.routeModule
-import io.ktor.http.*
 import io.ktor.serialization.jackson.*
 import io.ktor.server.application.*
 import io.ktor.server.config.*
-import io.ktor.server.http.content.*
 import io.ktor.server.netty.*
 import io.ktor.server.plugins.contentnegotiation.*
-import io.ktor.server.plugins.cors.routing.*
-import io.ktor.server.plugins.swagger.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import org.koin.core.module.dsl.singleOf
@@ -71,8 +67,7 @@ fun Application.initialize() {
         jackson()
     }
 
-
-  routing {
+    routing {
     get("/openapi.json") {
       call.respond(application.openAPIGen.api.serialize())
     }
@@ -100,6 +95,7 @@ fun Application.initialize() {
         //route operation module
         modules(routeModule)
     }
+
 
   apiRouting {
     airportRoutes()

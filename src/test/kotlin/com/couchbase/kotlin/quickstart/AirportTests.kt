@@ -189,6 +189,34 @@ class AirportTests {
 
     @OptIn(InternalAPI::class)
     @Test
+    fun testAddAirportWithoutRequiredFields() = testApplication {
+        // Arrange
+        val documentId = "airport_test_invalid_payload"
+        val airport = Airport().apply {
+            city = "Test City"
+            faa = "TAA"
+            tz = "Europe/Berlin"
+        }
+
+        val objectMapper = jacksonObjectMapper()
+        val airportJson = objectMapper.writeValueAsString(airport)
+
+        // Act
+        val postResponse = client.post("/api/v1/airport/$documentId") {
+            body = TextContent(airportJson, ContentType.Application.Json)
+        }
+
+        // Assert
+        Assertions.assertEquals(HttpStatusCode.BadRequest, postResponse.status)
+
+        // Check if the document was not created
+        val getResponse = client.get("/api/v1/airport/$documentId")
+        Assertions.assertEquals(HttpStatusCode.NotFound, getResponse.status)
+    }
+
+
+    @OptIn(InternalAPI::class)
+    @Test
     fun testAddDuplicateAirport() = testApplication {
         // Create the airport
         val documentId = "airport_test_duplicate"
@@ -224,6 +252,36 @@ class AirportTests {
         // Delete the airport
         val deleteResponse = client.delete("/api/v1/airport/$documentId")
         Assertions.assertEquals(HttpStatusCode.OK, deleteResponse.status)
+    }
+
+    @OptIn(InternalAPI::class)
+    @Test
+    fun testUpdateWithInvalidDocument() = testApplication {
+        // Arrange
+        val documentId = "airport_test_update_invalid_doc"
+        val updatedAirport = Airport().apply {
+            city = "Updated City"
+            country = "Updated Country"
+            faa = "TAA"
+            icao = "TAAS"
+            tz = "Europe/Berlin"
+            geo = Geo(lat = 40.0, lon = 42.0, alt = 100.0)
+        }
+
+        val objectMapper = jacksonObjectMapper()
+        val updatedAirportJson = objectMapper.writeValueAsString(updatedAirport)
+
+        // Act
+        val putResponse = client.put("/api/v1/airport/$documentId") {
+            body = TextContent(updatedAirportJson, ContentType.Application.Json)
+        }
+
+        // Assert
+        Assertions.assertEquals(HttpStatusCode.BadRequest, putResponse.status)
+
+        // Check if the document was not created
+        val getResponse = client.get("/api/v1/airport/$documentId")
+        Assertions.assertEquals(HttpStatusCode.NotFound, getResponse.status)
     }
 
     @OptIn(InternalAPI::class)

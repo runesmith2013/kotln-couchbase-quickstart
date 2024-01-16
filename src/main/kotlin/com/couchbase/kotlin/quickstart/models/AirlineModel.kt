@@ -6,6 +6,7 @@ import com.couchbase.kotlin.quickstart.repositories.AirlineRepository
 import com.couchbase.kotlin.quickstart.services.AirlineService
 import com.fasterxml.jackson.annotation.JsonIgnore
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
+import java.lang.IllegalArgumentException
 
 // This class is used to represent
  // client requests to create a new
@@ -23,7 +24,13 @@ open class AirlineModel (
 
     @JsonIgnore
     var type: String? = null
-    )
+){
+    fun validate() {
+        if (callsign.isNullOrBlank() || country.isNullOrBlank() || name.isNullOrBlank()) {
+            throw IllegalArgumentException()
+        }
+    }
+}
 
 // This class is used to represent
 // Airline records

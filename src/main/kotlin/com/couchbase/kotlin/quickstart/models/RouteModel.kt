@@ -6,6 +6,7 @@ import com.couchbase.kotlin.quickstart.repositories.RouteRepository
 import com.couchbase.kotlin.quickstart.services.RouteService
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
+import java.lang.IllegalArgumentException
 
 // This class is used to represent
 // client requests to create a new
@@ -26,7 +27,13 @@ open class RouteModel (
 
     @JsonIgnore
     var type: String? = null
-)
+) {
+    fun validate() {
+        if (airline.isNullOrBlank() || airlineid.isNullOrBlank() || destinationairport.isNullOrBlank() || sourceairport.isNullOrBlank()) {
+            throw IllegalArgumentException()
+        }
+    }
+}
 
 open class Schedule (
     var day: Int = 0,

@@ -8,6 +8,7 @@ import com.couchbase.kotlin.quickstart.services.AirportService
 
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
+import java.lang.IllegalArgumentException
 import java.util.*
 
 // This class is used to represent
@@ -28,7 +29,13 @@ open class AirportModel(
 
     @JsonIgnore
     var type: String? = null
-)
+) {
+    fun validate() {
+        if (airportname.isNullOrBlank() || city.isNullOrBlank() || country.isNullOrBlank() || faa.isNullOrBlank()) {
+            throw IllegalArgumentException()
+        }
+    }
+}
 
 open class Geo (
     var alt: Double = 0.0,
@@ -44,3 +51,10 @@ val airportModule = module {
     singleOf(::AirportRepository)
     singleOf(::AirportService)
 }
+
+//// Install Ktor StatusPages feature for handling validation errors globally
+//fun StatusPages.Configuration.installValidationExceptionHandler() {
+//    exception<IllegalArgumentException> { cause ->
+//        call.respond(HttpStatusCode.BadRequest, cause.localizedMessage)
+//    }
+//}

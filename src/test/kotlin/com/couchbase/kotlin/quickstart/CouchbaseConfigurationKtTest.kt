@@ -62,15 +62,15 @@ internal class CouchbaseConfigurationKtTest {
 
     @Test
     fun testCreateBucket() {
-        var cfg = mockk<CouchbaseConfiguration>()
+        val cfg = mockk<CouchbaseConfiguration>()
         every { cfg.bucket } returns "bucketValue"
 
-        var bucket = mockk<Bucket>()
+        val bucket = mockk<Bucket>()
         every { runBlocking {
             bucket.waitUntilReady(10.seconds)
         } } returns bucket
 
-        var cluster = mockk<Cluster>()
+        val cluster = mockk<Cluster>()
         every { cluster.bucket("bucketValue") } returns bucket
 
         assert(bucket == createBucket(cluster, cfg))

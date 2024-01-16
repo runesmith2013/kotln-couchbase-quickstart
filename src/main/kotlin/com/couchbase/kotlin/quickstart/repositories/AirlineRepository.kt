@@ -49,7 +49,7 @@ class AirlineRepository(scope: Scope) {
         return result
     }
 
-    fun list(country: String? = null, offset: Int = 0, limit: Int = 10): List<Airline> {
+    fun list(country: String? = null, limit: Int = 10, offset: Int = 0): List<Airline> {
         val lowerCountry = country?.lowercase()
         val query = if (!lowerCountry.isNullOrEmpty()) {
             """
@@ -86,7 +86,7 @@ class AirlineRepository(scope: Scope) {
         }
     }
 
-    fun toAirport(airline: String, offset: Int = 0, limit: Int = 10): List<Airline> {
+    fun toAirport(airline: String, limit: Int = 10, offset: Int = 0,): List<Airline> {
         val lowerAirport = airline.lowercase()
         val query =
             """

@@ -209,6 +209,34 @@ class AirlineTests {
 
     @OptIn(InternalAPI::class)
     @Test
+    fun testAddAirlineWithoutRequiredFields() = testApplication {
+        // Arrange
+        val documentId = "airline_test_invalid_payload"
+        val airline = Airline().apply {
+            iata = "SAL"
+            icao = "SALL"
+            country = "Sample Country"
+        }
+
+        val objectMapper = jacksonObjectMapper()
+        val airlineJson = objectMapper.writeValueAsString(airline)
+
+        // Act
+        val postResponse = client.post("/api/v1/airline/$documentId") {
+            body = TextContent(airlineJson, ContentType.Application.Json)
+        }
+
+        // Assert
+        Assertions.assertEquals(HttpStatusCode.BadRequest, postResponse.status)
+
+        // Check if the document was not created
+        val getResponse = client.get("/api/v1/airline/$documentId")
+        Assertions.assertEquals(HttpStatusCode.NotFound, getResponse.status)
+    }
+
+
+    @OptIn(InternalAPI::class)
+    @Test
     fun updateAirlineTest() = testApplication {
         // Create airline
         val documentId = "airline_test_update"
@@ -252,6 +280,35 @@ class AirlineTests {
         val deleteResponse = client.delete("/api/v1/airline/$documentId")
         Assertions.assertEquals(HttpStatusCode.OK, deleteResponse.status)
     }
+
+    @OptIn(InternalAPI::class)
+    @Test
+    fun testUpdateWithInvalidDocument() = testApplication {
+        // Arrange
+        val documentId = "airline_test_update_invalid_doc"
+        val updatedAirline = Airline().apply {
+            iata = "SAL"
+            icao = "SALL"
+            callsign = "SAM"
+            country = "Updated Country"
+        }
+
+        val objectMapper = jacksonObjectMapper()
+        val updatedAirlineJson = objectMapper.writeValueAsString(updatedAirline)
+
+        // Act
+        val putResponse = client.put("/api/v1/airline/$documentId") {
+            body = TextContent(updatedAirlineJson, ContentType.Application.Json)
+        }
+
+        // Assert
+        Assertions.assertEquals(HttpStatusCode.BadRequest, putResponse.status)
+
+        // Check if the document was not created
+        val getResponse = client.get("/api/v1/airline/$documentId")
+        Assertions.assertEquals(HttpStatusCode.NotFound, getResponse.status)
+    }
+
 
     @OptIn(InternalAPI::class)
     @Test

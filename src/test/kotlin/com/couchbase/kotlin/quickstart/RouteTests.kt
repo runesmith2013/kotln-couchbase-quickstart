@@ -152,6 +152,37 @@ class RouteTests {
 
     @OptIn(InternalAPI::class)
     @Test
+    fun testAddRouteWithoutRequiredFields() = testApplication {
+        // Arrange
+        val documentId = "route_test_invalid_payload"
+        val route = Route().apply {
+            airlineid = "airline_sample"
+            destinationairport = "JFK"
+            stops = 0
+            equipment = "CRJ"
+            schedule = listOf(Schedule(day = 0, flight = "SAF123", utc = "14:05:00"))
+            distance = 1000.79
+        }
+
+        val objectMapper = jacksonObjectMapper()
+        val routeJson = objectMapper.writeValueAsString(route)
+
+        // Act
+        val postResponse = client.post("/api/v1/route/$documentId") {
+            body = TextContent(routeJson, ContentType.Application.Json)
+        }
+
+        // Assert
+        Assertions.assertEquals(HttpStatusCode.BadRequest, postResponse.status)
+
+        // Check if the document was not created
+        val getResponse = client.get("/api/v1/route/$documentId")
+        Assertions.assertEquals(HttpStatusCode.NotFound, getResponse.status)
+    }
+
+
+    @OptIn(InternalAPI::class)
+    @Test
     fun updateRouteTest() = testApplication {
         // Create route
         val documentId = "route_test_update"
@@ -212,6 +243,37 @@ class RouteTests {
         // Remove route
         val deleteResponse = client.delete("/api/v1/route/$documentId")
         Assertions.assertEquals(HttpStatusCode.OK, deleteResponse.status)
+    }
+
+    @OptIn(InternalAPI::class)
+    @Test
+    fun testUpdateWithInvalidDocument() = testApplication {
+        // Arrange
+        val documentId = "route_test_update_invalid_doc"
+        val updatedRoute = Route().apply {
+            airlineid = "airline_sample"
+            sourceairport = "SFO"
+            destinationairport = "JFK"
+            stops = 0
+            equipment = "CRJ"
+            schedule = listOf(Schedule(day = 0, flight = "SAF123", utc = "14:05:00"))
+            distance = 1000.79
+        }
+
+        val objectMapper = jacksonObjectMapper()
+        val updatedRouteJson = objectMapper.writeValueAsString(updatedRoute)
+
+        // Act
+        val putResponse = client.put("/api/v1/route/$documentId") {
+            body = TextContent(updatedRouteJson, ContentType.Application.Json)
+        }
+
+        // Assert
+        Assertions.assertEquals(HttpStatusCode.BadRequest, putResponse.status)
+
+        // Check if the document was not created
+        val getResponse = client.get("/api/v1/route/$documentId")
+        Assertions.assertEquals(HttpStatusCode.NotFound, getResponse.status)
     }
 
     @OptIn(InternalAPI::class)
