@@ -20,9 +20,9 @@ val couchbaseModule = module {
 }
 
 class CouchbaseConfiguration(cfg: ApplicationConfig) {
-  val connectionString: String = if (System.getenv("KTOR_ENVIRONMENT") == "Testing") System.getenv("DB_CONN_STR") else cfg.propertyOrNull("couchbase.connectionString")?.getString() ?: "localhost"
-  val username: String = if (System.getenv("KTOR_ENVIRONMENT") == "Testing") System.getenv("DB_USERNAME") else cfg.propertyOrNull("couchbase.username")?.getString() ?: "Administrator"
-  val password: String = if (System.getenv("KTOR_ENVIRONMENT") == "Testing") System.getenv("DB_PASSWORD") else cfg.propertyOrNull("couchbase.password")?.getString() ?: "password"
+  val connectionString: String = cfg.propertyOrNull("couchbase.connectionString")?.getString() ?: "localhost"
+  val username: String = cfg.propertyOrNull("couchbase.username")?.getString() ?: "Administrator"
+  val password: String = cfg.propertyOrNull("couchbase.password")?.getString() ?: "password"
   val bucket: String = cfg.propertyOrNull("couchbase.bucket")?.getString() ?: "travel-sample"
   val scope: String = cfg.propertyOrNull("couchbase.scope")?.getString() ?: "inventory"
 }
