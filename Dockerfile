@@ -12,4 +12,3 @@ RUN unzip ktor-docker-sample.zip
 RUN mv com.couchbase.kotlin-quickstart-*/* .
 RUN ls -lah bin
 ENV KTOR_ENV=dev
-ENTRYPOINT ["/app/bin/com.couchbase.kotlin-quickstart"]
