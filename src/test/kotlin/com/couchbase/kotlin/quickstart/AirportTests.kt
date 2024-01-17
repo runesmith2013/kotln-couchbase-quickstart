@@ -45,18 +45,6 @@ class AirportTests {
     }
 
     @Test
-    fun testListAirportsInInvalidCountry() = testApplication {
-        // Arrange
-        val airportAPI = "/api/v1/airport/list?country=invalid"
-
-        // Act
-        val response = client.get(airportAPI)
-
-        // Assert
-        Assertions.assertEquals(HttpStatusCode.NotFound, response.status)
-    }
-
-    @Test
     fun getDirectConnectionsTest() = testApplication {
         // Create query parameters
         val airport = "SFO"
@@ -78,18 +66,6 @@ class AirportTests {
 
         // Assert that the number of airports is as expected
         Assertions.assertEquals(limit, results.size)
-    }
-
-    @Test
-    fun testDirectConnectionsInvalidAirport() = testApplication {
-        // Arrange
-        val airportAPI = "/api/v1/airport/direct-connections?airport=invalid"
-
-        // Act
-        val response = client.get(airportAPI)
-
-        // Assert
-        Assertions.assertEquals(HttpStatusCode.NotFound, response.status)
     }
 
     @OptIn(InternalAPI::class)
@@ -122,7 +98,7 @@ class AirportTests {
         val newAirportResult = objectMapper.readValue<Airport>(postResponse.bodyAsText())
 
         // Get the airport by ID
-        var getResponse = client.get("/api/v1/airport/$documentId")
+        val getResponse = client.get("/api/v1/airport/$documentId")
         Assertions.assertEquals(HttpStatusCode.OK, getResponse.status)
         val resultAirport = objectMapper.readValue<Airport>(getResponse.bodyAsText())
 

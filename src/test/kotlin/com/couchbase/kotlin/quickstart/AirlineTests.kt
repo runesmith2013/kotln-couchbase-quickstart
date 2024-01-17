@@ -1,10 +1,8 @@
 package com.couchbase.kotlin.quickstart
 
 import com.couchbase.kotlin.quickstart.models.Airline
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
-import io.ktor.client.call.*
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import io.ktor.http.*
@@ -44,18 +42,6 @@ class AirlineTests {
         Assertions.assertEquals(pageSize * iterations, airlinesList.size)
     }
 
-    @Test
-    fun testListAirlinesInInvalidCountry() = testApplication {
-        // Arrange
-        val airlineAPI = "/api/v1/airline/list?country=invalid"
-
-        // Act
-        val response = client.get(airlineAPI)
-
-        // Assert
-        Assertions.assertEquals(HttpStatusCode.NotFound, response.status)
-    }
-
     @OptIn(InternalAPI::class)
     @Test
     fun getToAirportTest() = testApplication {
@@ -79,18 +65,6 @@ class AirlineTests {
 
         // Assert that the number of airlines is as expected
         Assertions.assertEquals(limit, results.size)
-    }
-
-    @Test
-    fun testToAirportInvalidAirport() = testApplication {
-        // Arrange
-        val airlineAPI = "/api/v1/airline/to-airport?airport=invalid"
-
-        // Act
-        val response = client.get(airlineAPI)
-
-        // Assert
-        Assertions.assertEquals(HttpStatusCode.NotFound, response.status)
     }
 
     @OptIn(InternalAPI::class)

@@ -41,13 +41,10 @@ dependencies {
     implementation("dev.forst", "ktor-openapi-generator", "0.6.1")
     implementation("io.ktor:ktor-client-serialization:$ktor_version")
     implementation ("io.ktor:ktor-server-core:$ktor_version")
-    implementation("io.ktor:ktor-server-cors-jvm:2.3.7")
-    implementation("io.ktor:ktor-server-swagger-jvm:2.3.7")
+    implementation("io.ktor:ktor-server-cors-jvm:$ktor_version")
 
     testImplementation("io.ktor:ktor-server-tests-jvm:$ktor_version")
     testImplementation("io.mockk:mockk:1.12.4")
-    testImplementation("io.ktor:ktor-server-test-host:$ktor_version")
-    testImplementation("org.jetbrains.kotlin:kotlin-test:$kotlin_version")
 }
 
 tasks.withType<Jar> {
@@ -58,4 +55,8 @@ tasks.withType<Jar> {
       from(zipTree(file.absoluteFile))
   }
   duplicatesStrategy = DuplicatesStrategy.INCLUDE
+}
+
+tasks.test {
+    useJUnitPlatform()
 }
