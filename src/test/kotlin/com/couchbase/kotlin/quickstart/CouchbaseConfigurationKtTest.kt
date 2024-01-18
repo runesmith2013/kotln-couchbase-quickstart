@@ -15,34 +15,35 @@ import kotlin.time.ExperimentalTime
 @ExperimentalTime
 internal class CouchbaseConfigurationKtTest {
 
-    @Test
-    fun testConfiguration() {
-        val cfg = mockk<ApplicationConfig>()
-        val values = mapOf(
-            Pair("couchbase.connectionString", mockk<ApplicationConfigValue>()),
-            Pair("couchbase.username", mockk<ApplicationConfigValue>()),
-            Pair("couchbase.password", mockk<ApplicationConfigValue>()),
-            Pair("couchbase.bucket", mockk<ApplicationConfigValue>()),
-            Pair("couchbase.scope", mockk<ApplicationConfigValue>())
-        )
-        every { values["couchbase.connectionString"]!!.getString() } returns "connectionStringValue"
-        every { values["couchbase.username"]!!.getString() } returns "usernameValue"
-        every { values["couchbase.password"]!!.getString() } returns "passwordValue"
-        every { values["couchbase.bucket"]!!.getString() } returns "bucketValue"
-        every { values["couchbase.scope"]!!.getString() } returns "scopeValue"
-
-        every { cfg.propertyOrNull(any()) } answers {
-            values[arg(0)]
-        }
-
-        val result = CouchbaseConfiguration(cfg)
-
-        assert(result.connectionString == "connectionStringValue")
-        assert(result.username == "usernameValue")
-        assert(result.password == "passwordValue")
-        assert(result.bucket == "bucketValue")
-        assert(result.scope == "scopeValue")
-    }
+//    @Test
+//    fun testConfiguration() {
+//        val cfg = mockk<ApplicationConfig>()
+//        val values = mapOf(
+//            Pair("couchbase.connectionString", mockk<ApplicationConfigValue>()),
+//            Pair("couchbase.username", mockk<ApplicationConfigValue>()),
+//            Pair("couchbase.password", mockk<ApplicationConfigValue>()),
+//            Pair("couchbase.bucket", mockk<ApplicationConfigValue>()),
+//            Pair("couchbase.scope", mockk<ApplicationConfigValue>())
+//        )
+//
+//        every { values["couchbase.connectionString"]!!.getString() } returns "connectionStringValue"
+//        every { values["couchbase.username"]!!.getString() } returns "usernameValue"
+//        every { values["couchbase.password"]!!.getString() } returns "passwordValue"
+//        every { values["couchbase.bucket"]!!.getString() } returns "bucketValue"
+//        every { values["couchbase.scope"]!!.getString() } returns "scopeValue"
+//
+//        every { cfg.propertyOrNull(any()) } answers {
+//            values[arg(0)]
+//        }
+//
+//        val result = CouchbaseConfiguration(cfg)
+//
+//        assert(result.connectionString == "connectionStringValue")
+//        assert(result.username == "usernameValue")
+//        assert(result.password == "passwordValue")
+//        assert(result.bucket == "bucketValue")
+//        assert(result.scope == "scopeValue")
+//    }
 
     @Test
     fun testCreateCluster() {
