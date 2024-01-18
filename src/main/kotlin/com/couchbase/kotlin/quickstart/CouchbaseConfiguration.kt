@@ -20,12 +20,13 @@ val couchbaseModule = module {
 }
 
 class CouchbaseConfiguration(cfg: ApplicationConfig) {
-  val connectionString: String = cfg.propertyOrNull("couchbase.connectionString")?.getString() ?: "localhost"
-  val username: String = cfg.propertyOrNull("couchbase.username")?.getString() ?: "Administrator"
-  val password: String = cfg.propertyOrNull("couchbase.password")?.getString() ?: "password"
+  val connectionString: String = System.getenv("DB_CONN_STR") ?: cfg.propertyOrNull("couchbase.connectionString")?.getString() ?: "localhost"
+  val username: String = System.getenv("DB_USERNAME") ?: cfg.propertyOrNull("couchbase.username")?.getString() ?: "Administrator"
+  val password: String = System.getenv("DB_PASSWORD") ?: cfg.propertyOrNull("couchbase.password")?.getString() ?: "password"
   val bucket: String = cfg.propertyOrNull("couchbase.bucket")?.getString() ?: "travel-sample"
   val scope: String = cfg.propertyOrNull("couchbase.scope")?.getString() ?: "inventory"
 }
+
 
 // Creates a cluster bean
 fun createCluster(configuration: CouchbaseConfiguration): Cluster {
