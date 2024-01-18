@@ -25,6 +25,14 @@ class CouchbaseConfiguration(cfg: ApplicationConfig) {
   val password: String = System.getenv("DB_PASSWORD") ?: cfg.propertyOrNull("couchbase.password")?.getString() ?: "password"
   val bucket: String = cfg.propertyOrNull("couchbase.bucket")?.getString() ?: "travel-sample"
   val scope: String = cfg.propertyOrNull("couchbase.scope")?.getString() ?: "inventory"
+
+  init {
+    println("Connection String: $connectionString")
+    println("Username: $username")
+    println("Password: $password") // Be careful with this, it's generally not a good idea to print passwords
+    println("Bucket: $bucket")
+    println("Scope: $scope")
+  }
 }
 
 
