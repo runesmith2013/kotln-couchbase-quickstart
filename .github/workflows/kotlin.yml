@@ -31,7 +31,7 @@ jobs:
       - name: Build with Gradle
         run: ./gradlew build -x test
       - name: Test
-        run: ./gradlew test --info --stacktrace
+        run: ./gradlew test
 #      - name: Report Status
 #        if: always()
 #        uses: ravsamhq/notify-slack-action@v1
