@@ -11,6 +11,10 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      DB_CONN_STR: ${{ vars.DB_CONN_STR }}
+      DB_USERNAME: ${{ vars.DB_USERNAME }}
+      DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
     steps:
       - uses: actions/checkout@v4
       - name: Check Memory Free
@@ -23,14 +27,7 @@ jobs:
           java-version: 11
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
-#      - name: Replace secrets in application.conf
-#        run: |
-#            sed -i "s#DB_CONN_STR#${{ vars.DB_CONN_STR }}#g" src/main/resources/application.conf
-#            sed -i "s#DB_USERNAME#${{ vars.DB_USERNAME }}#g" src/main/resources/application.conf
-#            sed -i "s#DB_PASSWORD#${{ secrets.DB_PASSWORD }}#g" src/main/resources/application.conf
-#
-#            # Print the updated file for verification
-#            cat ./src/main/resources/application.conf
+
       - name: Build with Gradle
         run: ./gradlew build -x test
       - name: Test
