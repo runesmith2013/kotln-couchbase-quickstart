@@ -115,7 +115,7 @@ docker build -t couchbase-koltin-quickstart .
 - Run the docker image
 
 ```shell 
-docker run -p 8080:8080 couchbase-kotlin-quickstart
+docker run -e DB_CONN_STR=<connection_string> -e DB_USERNAME=<user_with_read_write_permission_to_travel-sample_bucket> -e DB_PASSWORD=<password_for_user> -p 8080:8080 couchbase-koltin-quickstart
 ```
 
 You can access the Application on http://0.0.0.0:8080
