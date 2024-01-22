@@ -34,7 +34,7 @@ git clone https://github.com/couchbase-examples/kotlin-quickstart
 ### Install Dependencies
 
 ```shell
-gradle build
+./gradlew build -x test
 ```
 ### Dependency Injection via Couchbase Koin module
 
