@@ -1,15 +1,12 @@
 package com.couchbase.kotlin.quickstart.models
 
-import com.couchbase.client.core.deps.com.fasterxml.jackson.annotation.JsonIgnore
 import com.couchbase.client.core.deps.com.fasterxml.jackson.annotation.JsonIgnoreProperties
-import com.couchbase.client.core.deps.com.fasterxml.jackson.annotation.JsonProperty
 import com.couchbase.kotlin.quickstart.repositories.AirportRepository
 import com.couchbase.kotlin.quickstart.services.AirportService
 
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
 import java.lang.IllegalArgumentException
-import java.util.*
 
 // This class is used to represent
 // client requests to create a new
@@ -22,13 +19,7 @@ open class AirportModel(
     var faa: String? = null,
     var geo: Geo? = null,
     var icao: String? = null,
-    var tz: String? = null,
-
-    @JsonIgnore
-    var id: String? = null,
-
-    @JsonIgnore
-    var type: String? = null
+    var tz: String? = null
 ) {
     fun validate() {
         if (airportname.isNullOrBlank() || city.isNullOrBlank() || country.isNullOrBlank() || faa.isNullOrBlank()) {
@@ -45,7 +36,7 @@ open class Geo (
 
 // This class is used to represent
 // Airport records
-class Airport() : AirportModel()
+class Airport : AirportModel()
 
 val airportModule = module {
     singleOf(::AirportRepository)

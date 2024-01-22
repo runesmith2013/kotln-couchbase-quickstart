@@ -22,7 +22,7 @@ class AirlineRepository(scope: Scope) {
 
     fun delete(id: String) {
         runBlocking(databaseContext) {
-            collection.remove(id);
+            collection.remove(id)
         }
     }
 
@@ -86,7 +86,7 @@ class AirlineRepository(scope: Scope) {
         }
     }
 
-    fun toAirport(airline: String, limit: Int = 10, offset: Int = 0,): List<Airline> {
+    fun toAirport(airline: String, limit: Int = 10, offset: Int = 0): List<Airline> {
         val lowerAirport = airline.lowercase()
         val query =
             """

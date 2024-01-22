@@ -1,8 +1,6 @@
 package com.couchbase.kotlin.quickstart.repositories
 
 import com.couchbase.client.kotlin.Scope
-import com.couchbase.kotlin.quickstart.models.Airline
-import com.couchbase.kotlin.quickstart.models.AirlineModel
 import com.couchbase.kotlin.quickstart.models.Route
 import com.couchbase.kotlin.quickstart.models.RouteModel
 import kotlinx.coroutines.DelicateCoroutinesApi
@@ -24,7 +22,7 @@ class RouteRepository(scope: Scope) {
 
     fun delete(id: String) {
         runBlocking(databaseContext) {
-            collection.remove(id);
+            collection.remove(id)
         }
     }
 

@@ -94,7 +94,7 @@ class AirportTests {
         val postResponse = client.post("/api/v1/airport/$documentId") {
             body = TextContent(newAirportJson, ContentType.Application.Json)
         }
-        Assertions.assertEquals(HttpStatusCode.OK, postResponse.status)
+        Assertions.assertEquals(HttpStatusCode.Created, postResponse.status)
         val newAirportResult = objectMapper.readValue<Airport>(postResponse.bodyAsText())
 
         // Get the airport by ID
@@ -150,7 +150,7 @@ class AirportTests {
         val postResponse = client.post("/api/v1/airport/$documentId") {
             body = TextContent(newAirportJson, ContentType.Application.Json)
         }
-        Assertions.assertEquals(HttpStatusCode.OK, postResponse.status)
+        Assertions.assertEquals(HttpStatusCode.Created, postResponse.status)
         val newAirportResult = objectMapper.readValue<Airport>(postResponse.bodyAsText())
 
         // Validate creation
@@ -217,7 +217,7 @@ class AirportTests {
         var postResponse = client.post("/api/v1/airport/$documentId") {
             body = TextContent(newAirportJson, ContentType.Application.Json)
         }
-        Assertions.assertEquals(HttpStatusCode.OK, postResponse.status)
+        Assertions.assertEquals(HttpStatusCode.Created, postResponse.status)
 
         // Try to create the same airport again
         postResponse = client.post("/api/v1/airport/$documentId") {
@@ -286,7 +286,7 @@ class AirportTests {
         val postResponse = client.post("/api/v1/airport/$documentId") {
             body = TextContent(airportJson, ContentType.Application.Json)
         }
-        Assertions.assertEquals(HttpStatusCode.OK, postResponse.status)
+        Assertions.assertEquals(HttpStatusCode.Created, postResponse.status)
         val airportResult = objectMapper.readValue<Airport>(postResponse.bodyAsText())
 
         // Update airport
@@ -339,7 +339,7 @@ class AirportTests {
         val postResponse = client.post("/api/v1/airport/$documentId") {
             body = TextContent(newAirportJson, ContentType.Application.Json)
         }
-        Assertions.assertEquals(HttpStatusCode.OK, postResponse.status)
+        Assertions.assertEquals(HttpStatusCode.Created, postResponse.status)
 
         // Delete airport
         val deleteResponse = client.delete("/api/v1/airport/$documentId")

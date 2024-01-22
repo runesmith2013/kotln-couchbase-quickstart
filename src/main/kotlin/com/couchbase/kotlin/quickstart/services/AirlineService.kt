@@ -19,7 +19,7 @@ class AirlineService(repo: AirlineRepository) {
         repository.delete(id)
     }
 
-    fun listAirlines(country: String? = null, limit: Int = 10, offset: Int = 0,): List<Airline> {
+    fun listAirlines(country: String? = null, limit: Int = 10, offset: Int = 0): List<Airline> {
         return repository.list(country, limit, offset)
     }
 

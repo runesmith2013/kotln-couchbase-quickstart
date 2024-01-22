@@ -41,7 +41,7 @@ class RouteTests {
         val postResponse = client.post("/api/v1/route/$documentId") {
             body = TextContent(routeJson, ContentType.Application.Json)
         }
-        Assertions.assertEquals(HttpStatusCode.OK, postResponse.status)
+        Assertions.assertEquals(HttpStatusCode.Created, postResponse.status)
         val newRouteResult = objectMapper.readValue<Route>(postResponse.bodyAsText())
 
         // Get the route by ID
@@ -98,7 +98,7 @@ class RouteTests {
         val postResponse = client.post("/api/v1/route/$documentId") {
             body = TextContent(routeJson, ContentType.Application.Json)
         }
-        Assertions.assertEquals(HttpStatusCode.OK, postResponse.status)
+        Assertions.assertEquals(HttpStatusCode.Created, postResponse.status)
         val newRouteResult = objectMapper.readValue<Route>(postResponse.bodyAsText())
 
         // Validate creation
@@ -137,7 +137,7 @@ class RouteTests {
         var postResponse = client.post("/api/v1/route/$documentId") {
             body = TextContent(routeJson, ContentType.Application.Json)
         }
-        Assertions.assertEquals(HttpStatusCode.OK, postResponse.status)
+        Assertions.assertEquals(HttpStatusCode.Created, postResponse.status)
 
         // Try to create the same route again
         postResponse = client.post("/api/v1/route/$documentId") {
@@ -208,7 +208,7 @@ class RouteTests {
         var postResponse = client.post("/api/v1/route/$documentId") {
             body = TextContent(routeJson, ContentType.Application.Json)
         }
-        Assertions.assertEquals(HttpStatusCode.OK, postResponse.status)
+        Assertions.assertEquals(HttpStatusCode.Created, postResponse.status)
         val newRouteResult = objectMapper.readValue<Route>(postResponse.bodyAsText())
 
         // Update route
@@ -303,7 +303,7 @@ class RouteTests {
         val postResponse = client.post("/api/v1/route/$documentId") {
             body = TextContent(routeJson, ContentType.Application.Json)
         }
-        Assertions.assertEquals(HttpStatusCode.OK, postResponse.status)
+        Assertions.assertEquals(HttpStatusCode.Created, postResponse.status)
 
         // Delete route
         val deleteResponse = client.delete("/api/v1/route/$documentId")

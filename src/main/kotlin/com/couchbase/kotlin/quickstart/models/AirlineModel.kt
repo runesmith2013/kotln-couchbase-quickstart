@@ -4,7 +4,6 @@ import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
 import com.couchbase.kotlin.quickstart.repositories.AirlineRepository
 import com.couchbase.kotlin.quickstart.services.AirlineService
-import com.fasterxml.jackson.annotation.JsonIgnore
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import java.lang.IllegalArgumentException
 
@@ -17,13 +16,7 @@ open class AirlineModel (
     var country: String? = null,
     var iata: String? = null,
     var icao: String? = null,
-    var name: String? = null,
-
-    @JsonIgnore
-    var id: String? = null,
-
-    @JsonIgnore
-    var type: String? = null
+    var name: String? = null
 ){
     fun validate() {
         if (callsign.isNullOrBlank() || country.isNullOrBlank() || name.isNullOrBlank()) {
@@ -35,7 +28,7 @@ open class AirlineModel (
 // This class is used to represent
 // Airline records
 @JsonIgnoreProperties(ignoreUnknown = true)
-class Airline() : AirlineModel()
+class Airline : AirlineModel()
 
 val airlineModule = module {
     singleOf(::AirlineRepository)

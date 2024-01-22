@@ -1,6 +1,5 @@
 package com.couchbase.kotlin.quickstart.models
 
-import com.couchbase.client.core.deps.com.fasterxml.jackson.annotation.JsonIgnore
 import com.couchbase.client.core.deps.com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.couchbase.kotlin.quickstart.repositories.RouteRepository
 import com.couchbase.kotlin.quickstart.services.RouteService
@@ -20,13 +19,7 @@ open class RouteModel (
     var equipment: String? = null,
     var schedule: List<Schedule>? = null,
     var sourceairport: String? = null,
-    var stops: Int? = 0,
-
-    @JsonIgnore
-    var id: String? = null,
-
-    @JsonIgnore
-    var type: String? = null
+    var stops: Int? = 0
 ) {
     fun validate() {
         if (airline.isNullOrBlank() || airlineid.isNullOrBlank() || destinationairport.isNullOrBlank() || sourceairport.isNullOrBlank()) {
@@ -43,7 +36,7 @@ open class Schedule (
 
 // This class is used to represent
 // Route records
-class Route() : RouteModel()
+class Route : RouteModel()
 
 val routeModule = module {
     singleOf(::RouteRepository)

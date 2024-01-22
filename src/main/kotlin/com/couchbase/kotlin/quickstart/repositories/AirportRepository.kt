@@ -23,7 +23,7 @@ class AirportRepository (scope: Scope) {
 
     fun delete(id: String) {
         runBlocking(databaseContext) {
-            collection.remove(id);
+            collection.remove(id)
         }
     }
 

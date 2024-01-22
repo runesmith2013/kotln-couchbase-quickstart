@@ -42,7 +42,6 @@ class AirlineTests {
         Assertions.assertEquals(pageSize * iterations, airlinesList.size)
     }
 
-    @OptIn(InternalAPI::class)
     @Test
     fun getToAirportTest() = testApplication {
         // Create query parameters
@@ -86,7 +85,7 @@ class AirlineTests {
         val postResponse = client.post("/api/v1/airline/$documentId") {
             body = TextContent(airlineJson, ContentType.Application.Json)
         }
-        Assertions.assertEquals(HttpStatusCode.OK, postResponse.status)
+        Assertions.assertEquals(HttpStatusCode.Created, postResponse.status)
         val newAirlineResult = objectMapper.readValue<Airline>(postResponse.bodyAsText())
 
         // Get the airline by ID
@@ -136,7 +135,7 @@ class AirlineTests {
         val postResponse = client.post("/api/v1/airline/$documentId") {
             body = TextContent(airlineJson, ContentType.Application.Json)
         }
-        Assertions.assertEquals(HttpStatusCode.OK, postResponse.status)
+        Assertions.assertEquals(HttpStatusCode.Created, postResponse.status)
         val newAirlineResult = objectMapper.readValue<Airline>(postResponse.bodyAsText())
 
         // Validate creation
@@ -168,7 +167,7 @@ class AirlineTests {
         var postResponse = client.post("/api/v1/airline/$documentId") {
             body = TextContent(airlineJson, ContentType.Application.Json)
         }
-        Assertions.assertEquals(HttpStatusCode.OK, postResponse.status)
+        Assertions.assertEquals(HttpStatusCode.Created, postResponse.status)
 
         // Try to create the same airline again
         postResponse = client.post("/api/v1/airline/$documentId") {
@@ -229,7 +228,7 @@ class AirlineTests {
         var postResponse = client.post("/api/v1/airline/$documentId") {
             body = TextContent(airlineJson, ContentType.Application.Json)
         }
-        Assertions.assertEquals(HttpStatusCode.OK, postResponse.status)
+        Assertions.assertEquals(HttpStatusCode.Created, postResponse.status)
         val newAirlineResult = objectMapper.readValue<Airline>(postResponse.bodyAsText())
 
         // Update airline
@@ -301,10 +300,10 @@ class AirlineTests {
         val airlineJson = objectMapper.writeValueAsString(airline)
 
         // Post the airline
-        var postResponse = client.post("/api/v1/airline/$documentId") {
+        val postResponse = client.post("/api/v1/airline/$documentId") {
             body = TextContent(airlineJson, ContentType.Application.Json)
         }
-        Assertions.assertEquals(HttpStatusCode.OK, postResponse.status)
+        Assertions.assertEquals(HttpStatusCode.Created, postResponse.status)
 
         // Delete airline
         val deleteResponse = client.delete("/api/v1/airline/$documentId")

@@ -4,6 +4,8 @@ import com.couchbase.client.kotlin.Bucket
 import com.couchbase.client.kotlin.Cluster
 import com.couchbase.client.kotlin.Scope
 import io.ktor.server.config.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
@@ -27,9 +29,11 @@ class CouchbaseConfiguration(cfg: ApplicationConfig) {
   val scope: String = cfg.propertyOrNull("couchbase.scope")?.getString() ?: "inventory"
 }
 
-
 // Creates a cluster bean
 fun createCluster(configuration: CouchbaseConfiguration): Cluster {
+  if (configuration.connectionString.isEmpty() || configuration.username.isEmpty() || configuration.password.isEmpty()) {
+    throw IllegalArgumentException("Connection string, username, or password is not provided in the configuration.")
+  }
   return Cluster.connect(
     connectionString = configuration.connectionString,
     username = configuration.username,
@@ -37,18 +41,35 @@ fun createCluster(configuration: CouchbaseConfiguration): Cluster {
   )
 }
 
-
 // Creates a bucket bean
 @ExperimentalTime
 fun createBucket(cluster: Cluster, configuration: CouchbaseConfiguration): Bucket {
+  if (configuration.bucket.isEmpty()) {
+    throw IllegalArgumentException("Bucket name is not provided in the configuration.")
+  }
   val result : Bucket?
   runBlocking {
     result = cluster.bucket(configuration.bucket).waitUntilReady(10.seconds)
   }
-  return result!!
+  return result ?: throw IllegalStateException("Ensure that you have the travel-sample bucket loaded in the cluster.")
 }
 
 // Creates a bucket scope bean
 fun createScope(bucket: Bucket, configuration: CouchbaseConfiguration): Scope {
-  return bucket.scope(configuration.scope)
+  if (configuration.scope.isEmpty()) {
+    throw IllegalArgumentException("Scope name is not provided in the configuration.")
+  }
+
+  val scope = bucket.scope(configuration.scope)
+
+  try {
+    scope.collection(configuration.scope)
+  } catch (e: Exception) {
+    throw IllegalStateException("Inventory scope does not exist in the bucket. Ensure that you have the inventory scope in your travel-sample bucket.")
+  }
+
+  return scope
 }
+
+
+
