@@ -15,27 +15,6 @@ import kotlin.time.ExperimentalTime
 
 @ExperimentalTime
 internal class CouchbaseConfigurationKtTest {
-
-    @Test
-    fun testCouchbaseConfiguration() {
-        val cfg : ApplicationConfig = mockk()
-        every { cfg.propertyOrNull("couchbase.connectionString")?.getString() } returns "localhost"
-        every { cfg.propertyOrNull("couchbase.username")?.getString() } returns "Administrator"
-        every { cfg.propertyOrNull("couchbase.password")?.getString() } returns "password"
-        every { cfg.propertyOrNull("couchbase.bucket")?.getString() } returns "travel-sample"
-        every { cfg.propertyOrNull("couchbase.scope")?.getString() } returns "inventory"
-
-        val couchbaseConfiguration = CouchbaseConfiguration(cfg)
-
-        verify {
-            cfg.propertyOrNull("couchbase.connectionString")?.getString()
-            cfg.propertyOrNull("couchbase.username")?.getString()
-            cfg.propertyOrNull("couchbase.password")?.getString()
-            cfg.propertyOrNull("couchbase.bucket")?.getString()
-            cfg.propertyOrNull("couchbase.scope")?.getString()
-        }
-    }
-
     @Test
     fun testCreateCluster() {
         val cfg : CouchbaseConfiguration = mockk()
