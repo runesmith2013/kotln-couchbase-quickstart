@@ -1,8 +1,8 @@
 package com.couchbase.kotlin.quickstart.models
 
-import com.couchbase.client.core.deps.com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.couchbase.kotlin.quickstart.repositories.AirportRepository
 import com.couchbase.kotlin.quickstart.services.AirportService
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
@@ -36,16 +36,10 @@ open class Geo (
 
 // This class is used to represent
 // Airport records
+@JsonIgnoreProperties(ignoreUnknown = true)
 class Airport : AirportModel()
 
 val airportModule = module {
     singleOf(::AirportRepository)
     singleOf(::AirportService)
 }
-
-//// Install Ktor StatusPages feature for handling validation errors globally
-//fun StatusPages.Configuration.installValidationExceptionHandler() {
-//    exception<IllegalArgumentException> { cause ->
-//        call.respond(HttpStatusCode.BadRequest, cause.localizedMessage)
-//    }
-//}

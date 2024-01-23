@@ -1,8 +1,8 @@
 package com.couchbase.kotlin.quickstart.models
 
-import com.couchbase.client.core.deps.com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.couchbase.kotlin.quickstart.repositories.RouteRepository
 import com.couchbase.kotlin.quickstart.services.RouteService
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
 import java.lang.IllegalArgumentException
@@ -36,6 +36,7 @@ open class Schedule (
 
 // This class is used to represent
 // Route records
+@JsonIgnoreProperties(ignoreUnknown = true)
 class Route : RouteModel()
 
 val routeModule = module {
