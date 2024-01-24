@@ -28,7 +28,7 @@ We will walk through the different steps required to get the application running
 ### Cloning Repo
 
 ```shell
-git clone https://github.com/couchbase-examples/kotlin-quickstart
+git clone https://github.com/couchbase-examples/kotlin-quickstart.git
 ```
 
 ### Install Dependencies
@@ -57,7 +57,7 @@ fun createBucket(cluster: Cluster, configuration: CouchbaseConfiguration): Bucke
   runBlocking {
     result = cluster.bucket(configuration.bucket).waitUntilReady(10.seconds)
   }
-  return result!!
+  return result
 }
 
 // Creates a bucket scope bean
@@ -151,7 +151,7 @@ For this quickstart, we use three collections, airport, airline and routes that 
 
 If you would like to add another entity to the APIs, these are the steps to follow:
 
-- Create the new entity (collection) in the Couchbase bucket. You can create the collection using the [SDK](https://docs.couchbase.com/sdk-api/couchbase-net-client/api/Couchbase.Management.Collections.ICouchbaseCollectionManager.html#Couchbase_Management_Collections_ICouchbaseCollectionManager_CreateCollectionAsync_Couchbase_Management_Collections_CollectionSpec_Couchbase_Management_Collections_CreateCollectionOptions_) or via the [Couchbase Server interface](https://docs.couchbase.com/cloud/n1ql/n1ql-language-reference/createcollection.html).
+- Create the new entity (collection) in the Couchbase bucket. You can create the collection using the [SDK](https://docs.couchbase.com/sdk-api/couchbase-kotlin-client-1.1.8/kotlin-client/com.couchbase.client.kotlin.manager.collection/-collection-manager/index.html#2117033537%2FFunctions%2F1565675143) or via the [Couchbase Server interface](https://docs.couchbase.com/cloud/n1ql/n1ql-language-reference/createcollection.html).
 - Define the routes in a file inside the `src/main/kotlin/com/couchbase/kotlin/quickstart/routes` folder similar to the existing routes.
 - Define the services in a new file inside the `src/main/kotlin/com/couchbase/kotlin/quickstart/services` folder similar to the existing services.
 - Define the repository for this collection inside a new file inside the `src/main/kotlin/com/couchbase/kotlin/quickstart/repositories` folder similar to the existing repositories.
