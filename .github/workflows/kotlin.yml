@@ -1,0 +1,43 @@
+name: Kotlin Ktor
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+  workflow_dispatch:
+    schedule:
+      - cron: "0 7 * * *"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      DB_CONN_STR: ${{ vars.DB_CONN_STR }}
+      DB_USERNAME: ${{ vars.DB_USERNAME }}
+      DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check Memory Free
+        run: |
+          free -m
+      - name: Setup JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'adopt'
+          java-version: 11
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+      - name: Build with Gradle
+        run: ./gradlew build -x test
+      - name: Test
+        run: ./gradlew test
+      - name: Report Status
+        if: always()
+        uses: ravsamhq/notify-slack-action@v1
+        with:
+          status: ${{ job.status }}
+          notification_title: "Repo: *{repo}*"
+          message_format: "{emoji}    *{status_message}* in <{repo_url}|{repo}@{branch}> on <{commit_url}|{commit_sha}>"
+          footer: "<{run_url}|View Full Run on GitHub>"
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.ACTION_MONITORING_SLACK }}
