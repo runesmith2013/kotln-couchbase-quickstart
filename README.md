@@ -14,8 +14,8 @@ To run this prebuilt project, you will need:
 
 - [Couchbase Capella](https://www.couchbase.com/products/capella/) cluster with [travel-sample](https://docs.couchbase.com/kotlin-sdk/current/ref/travel-app-data-model.html) bucket loaded.
     - To run this tutorial using a self managed Couchbase cluster, please refer to the [appendix](#running-self-managed-couchbase-cluster).
-- [Java SDK v1.8](https://www.oracle.com/java/technologies/downloads/) or higher installed.
-    - Ensure that the Java version is [compatible](https://docs.couchbase.com/kotlin-sdk/current/project-docs/compatibility.html) with the Couchbase SDK.
+- [Java JDK](https://docs.couchbase.com/kotlin-sdk/current/project-docs/compatibility.html#jdk-compat) installed.
+    - Ensure that the Java version is [compatible](https://docs.couchbase.com/kotlin-sdk/current/project-docs/compatibility.html#jdk-compat) with the Couchbase SDK.
 - Code Editor installed (Vim, IntelliJ IDEA, Eclipse, or Visual Studio Code)
 - Loading Travel Sample Bucket
     - If travel-sample is not loaded in your Capella cluster, you can load it by following the instructions for your Capella Cluster:
@@ -82,7 +82,7 @@ All configuration for communication with the database is stored in the `src/main
 
 ```
 couchbase {
-    connectionString = "localhost"
+    connectionString = "couchbases://yourassignedhostname.cloud.couchbase.com"
     username = "Administrator"
     password = "password"
     bucket = "travel-sample"
@@ -90,6 +90,9 @@ couchbase {
 }
 ```
 > _from [`src/main/resources/application.conf`](https://github.com/couchbase-examples/kotlin-quickstart/blob/main/src/main/resources/application.conf)_
+
+> Note: The connection string expects the `couchbases://` or `couchbase://` part.
+
 
 This includes the connection string, username, password, bucket and scope names. The default username is assumed to be `Administrator` and the default password is assumed to be `password`.
 If these are different in your environment you will need to change them before running the application.
