@@ -28,7 +28,7 @@ fun NormalOpenAPIRoute.routeRoutes() {
                     throws(HttpStatusCode.BadRequest, "Required fields (airline, airlineid, destinationairport, sourceairport) cannot be null or blank.", IllegalArgumentException::class) {
                         post<RouteRequest, Route, RouteModel> (
                             info(
-                                description = "Create Route with specified ID.\n\nThis provides an example of using Key Value operations in Couchbase to create a new document with a specified ID.\n\n Code: [`routes/RouteRoutes`](https://github.com/couchbase-examples/kotlin-quickstart/blob/kotlin-quickstart-v2/src/main/kotlin/com/couchbase/kotlin/quickstart/routes/RouteRoutes.kt) \n File: `RouteRoutes` \n Method: `createRoute`"
+                                description = "Create Route with specified ID.\n\nThis provides an example of using Key Value operations in Couchbase to create a new document with a specified ID.\n\n Code: [`routes/RouteRoutes`](https://github.com/couchbase-examples/kotlin-quickstart/blob/main/src/main/kotlin/com/couchbase/kotlin/quickstart/routes/RouteRoutes.kt) \n File: `RouteRoutes` \n Method: `createRoute`"
                             ),
                             status(HttpStatusCode.Created)
                         ) { params, data ->
@@ -40,7 +40,7 @@ fun NormalOpenAPIRoute.routeRoutes() {
                 throws(HttpStatusCode.NotFound, DocumentNotFoundException::class) {
                     get<RouteRequest, Route> (
                         info(
-                            description = "Get Route with specified ID.\n\nThis provides an example of using Key Value operations in Couchbase to get a document with specified ID.\n\n Code: [`routes/RouteRoutes`](https://github.com/couchbase-examples/kotlin-quickstart/blob/kotlin-quickstart-v2/src/main/kotlin/com/couchbase/kotlin/quickstart/routes/RouteRoutes.kt) \n File: `RouteRoutes` \n Method: `getRouteById`"
+                            description = "Get Route with specified ID.\n\nThis provides an example of using Key Value operations in Couchbase to get a document with specified ID.\n\n Code: [`routes/RouteRoutes`](https://github.com/couchbase-examples/kotlin-quickstart/blob/main/src/main/kotlin/com/couchbase/kotlin/quickstart/routes/RouteRoutes.kt) \n File: `RouteRoutes` \n Method: `getRouteById`"
                         ),
                         status(HttpStatusCode.OK)
                     ) { params ->
@@ -49,7 +49,7 @@ fun NormalOpenAPIRoute.routeRoutes() {
                     throws(HttpStatusCode.BadRequest, "Required fields (airline, airlineid, destinationairport, sourceairport) cannot be null or blank.", IllegalArgumentException::class) {
                         put<RouteRequest, Route, Route> (
                             info(
-                                description = "Update Route with specified ID.\n\nThis provides an example of using Key Value operations in Couchbase to upsert a document with specified ID.\n\n Code: [`routes/RouteRoutes`](https://github.com/couchbase-examples/kotlin-quickstart/blob/kotlin-quickstart-v2/src/main/kotlin/com/couchbase/kotlin/quickstart/routes/RouteRoutes.kt) \n File: `RouteRoutes` \n Method: `updateRoute`"
+                                description = "Update Route with specified ID.\n\nThis provides an example of using Key Value operations in Couchbase to upsert a document with specified ID.\n\n Code: [`routes/RouteRoutes`](https://github.com/couchbase-examples/kotlin-quickstart/blob/main/src/main/kotlin/com/couchbase/kotlin/quickstart/routes/RouteRoutes.kt) \n File: `RouteRoutes` \n Method: `updateRoute`"
                             ),
                             status(HttpStatusCode.OK)
                         ) { params, route ->
@@ -60,7 +60,7 @@ fun NormalOpenAPIRoute.routeRoutes() {
                     }
                     delete<RouteRequest, RouteDeleteResponse> (
                         info(
-                            description = "Update Route with specified ID.\n\nThis provides an example of using Key Value operations in Couchbase to upsert a document with specified ID.\n\n Code: [`routes/RouteRoutes`](https://github.com/couchbase-examples/kotlin-quickstart/blob/kotlin-quickstart-v2/src/main/kotlin/com/couchbase/kotlin/quickstart/routes/RouteRoutes.kt) \n File: `RouteRoutes` \n Method: `deleteRoute`"
+                            description = "Update Route with specified ID.\n\nThis provides an example of using Key Value operations in Couchbase to upsert a document with specified ID.\n\n Code: [`routes/RouteRoutes`](https://github.com/couchbase-examples/kotlin-quickstart/blob/main/src/main/kotlin/com/couchbase/kotlin/quickstart/routes/RouteRoutes.kt) \n File: `RouteRoutes` \n Method: `deleteRoute`"
                         ),
                         status(HttpStatusCode.OK)
                     ) { params ->

@@ -36,7 +36,7 @@ fun NormalOpenAPIRoute.airportRoutes() {
                     throws(HttpStatusCode.BadRequest, "Required fields (airportname, city, country, faa) cannot be null or blank.", IllegalArgumentException::class) {
                         post<AirportRequest, Airport, AirportModel> (
                             info(
-                                description = "Create Airport with specified ID.\n\nThis provides an example of using Key Value operations in Couchbase to create a new document with a specified ID.\n\n Code: [`routes/AirportRoutes`](https://github.com/couchbase-examples/kotlin-quickstart/blob/kotlin-quickstart-v2/src/main/kotlin/com/couchbase/kotlin/quickstart/routes/AirportRoutes.kt) \n File: `AirportRoutes` \n Method: `createAirport`"
+                                description = "Create Airport with specified ID.\n\nThis provides an example of using Key Value operations in Couchbase to create a new document with a specified ID.\n\n Code: [`routes/AirportRoutes`](https://github.com/couchbase-examples/kotlin-quickstart/blob/main/src/main/kotlin/com/couchbase/kotlin/quickstart/routes/AirportRoutes.kt) \n File: `AirportRoutes` \n Method: `createAirport`"
                             ),
                             status(HttpStatusCode.Created)
                         ){ params, data ->
@@ -48,7 +48,7 @@ fun NormalOpenAPIRoute.airportRoutes() {
                 throws(HttpStatusCode.NotFound, DocumentNotFoundException::class) {
                     get<AirportRequest, Airport> (
                         info(
-                            description = "Get Airport with specified ID.\n\nThis provides an example of using Key Value operations in Couchbase to get a document with specified ID.\n\n Code: [`routes/AirportRoutes`](https://github.com/couchbase-examples/kotlin-quickstart/blob/kotlin-quickstart-v2/src/main/kotlin/com/couchbase/kotlin/quickstart/routes/AirportRoutes.kt) \n File: `AirportRoutes` \n Method: `getAirportById`"
+                            description = "Get Airport with specified ID.\n\nThis provides an example of using Key Value operations in Couchbase to get a document with specified ID.\n\n Code: [`routes/AirportRoutes`](https://github.com/couchbase-examples/kotlin-quickstart/blob/main/src/main/kotlin/com/couchbase/kotlin/quickstart/routes/AirportRoutes.kt) \n File: `AirportRoutes` \n Method: `getAirportById`"
                         ),
                         status(HttpStatusCode.OK)
                     ) { params ->
@@ -57,7 +57,7 @@ fun NormalOpenAPIRoute.airportRoutes() {
                     throws(HttpStatusCode.BadRequest, "Required fields (airportname, city, country, faa) cannot be null or blank.", IllegalArgumentException::class) {
                         put<AirportRequest, Airport, Airport> (
                             info(
-                                description = "Update Airport with specified ID.\n\nThis provides an example of using Key Value operations in Couchbase to upsert a document with specified ID.\n\n Code: [`routes/AirportRoutes`](https://github.com/couchbase-examples/kotlin-quickstart/blob/kotlin-quickstart-v2/src/main/kotlin/com/couchbase/kotlin/quickstart/routes/AirportRoutes.kt) \n File: `AirportRoutes` \n Method: `updateAirport`"
+                                description = "Update Airport with specified ID.\n\nThis provides an example of using Key Value operations in Couchbase to upsert a document with specified ID.\n\n Code: [`routes/AirportRoutes`](https://github.com/couchbase-examples/kotlin-quickstart/blob/main/src/main/kotlin/com/couchbase/kotlin/quickstart/routes/AirportRoutes.kt) \n File: `AirportRoutes` \n Method: `updateAirport`"
                             ),
                             status(HttpStatusCode.OK)
                         ) { params, airport ->
@@ -68,7 +68,7 @@ fun NormalOpenAPIRoute.airportRoutes() {
                     }
                     delete<AirportRequest, AirportDeleteResponse> (
                         info(
-                            description = "Delete Airport with specified ID.\n\nThis provides an example of using Key Value operations in Couchbase to delete a document with specified ID.\n\n Code: [`routes/AirportRoutes`](https://github.com/couchbase-examples/kotlin-quickstart/blob/kotlin-quickstart-v2/src/main/kotlin/com/couchbase/kotlin/quickstart/routes/AirportRoutes.kt) \n File: `AirportRoutes` \n Method: `deleteAirport`"
+                            description = "Delete Airport with specified ID.\n\nThis provides an example of using Key Value operations in Couchbase to delete a document with specified ID.\n\n Code: [`routes/AirportRoutes`](https://github.com/couchbase-examples/kotlin-quickstart/blob/main/src/main/kotlin/com/couchbase/kotlin/quickstart/routes/AirportRoutes.kt) \n File: `AirportRoutes` \n Method: `deleteAirport`"
                         ),
                         status(HttpStatusCode.OK)
                     ) { params ->
@@ -79,7 +79,7 @@ fun NormalOpenAPIRoute.airportRoutes() {
                 route("list") {
                     get<AirportPaginationRequest, List<Airport>> (
                         info(
-                            description = "Get list of Airports. Optionally, you can filter the list by Country.\n\nThis provides an example of using a SQL++ query in Couchbase to fetch a list of documents matching the specified criteria.\n\n Code: [`routes/AirportRoutes`](https://github.com/couchbase-examples/kotlin-quickstart/blob/kotlin-quickstart-v2/src/main/kotlin/com/couchbase/kotlin/quickstart/routes/AirportRoutes.kt) \n File: `AirportRoutes` \n Method: `listAirports`"
+                            description = "Get list of Airports. Optionally, you can filter the list by Country.\n\nThis provides an example of using a SQL++ query in Couchbase to fetch a list of documents matching the specified criteria.\n\n Code: [`routes/AirportRoutes`](https://github.com/couchbase-examples/kotlin-quickstart/blob/main/src/main/kotlin/com/couchbase/kotlin/quickstart/routes/AirportRoutes.kt) \n File: `AirportRoutes` \n Method: `listAirports`"
                         ),
                         status(HttpStatusCode.OK)
                     ) { params ->
@@ -89,7 +89,7 @@ fun NormalOpenAPIRoute.airportRoutes() {
                 route("direct-connections") {
                     get<DirectDestinationsRequest, List<DestinationAirport>> (
                         info(
-                            description = "Get Direct Connections from specified Airport.\n\nThis provides an example of using a SQL++ query in Couchbase to fetch a list of documents matching the specified criteria.\n\n Code: [`routes/AirportRoutes`](https://github.com/couchbase-examples/kotlin-quickstart/blob/kotlin-quickstart-v2/src/main/kotlin/com/couchbase/kotlin/quickstart/routes/AirportRoutes.kt) \n File: `AirportRoutes` \n Method: `directDestinations`"
+                            description = "Get Direct Connections from specified Airport.\n\nThis provides an example of using a SQL++ query in Couchbase to fetch a list of documents matching the specified criteria.\n\n Code: [`routes/AirportRoutes`](https://github.com/couchbase-examples/kotlin-quickstart/blob/main/src/main/kotlin/com/couchbase/kotlin/quickstart/routes/AirportRoutes.kt) \n File: `AirportRoutes` \n Method: `directDestinations`"
                         ),
                         status(HttpStatusCode.OK)
                     ) { params ->
