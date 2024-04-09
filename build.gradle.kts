@@ -7,7 +7,7 @@ val logback_version: String by project
 
 plugins {
     application
-    kotlin("jvm") version "1.9.22"
+    kotlin("jvm") version "1.9.23"
 }
 
 group = "com.couchbase.kotlin"
