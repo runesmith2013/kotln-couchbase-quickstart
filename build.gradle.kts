@@ -36,7 +36,7 @@ dependencies {
     implementation("io.insert-koin:koin-ktor:$koin_version")
     implementation("io.insert-koin:koin-logger-slf4j:$koin_version")
     implementation("io.github.config4k:config4k:0.7.0")
-    implementation("org.junit.jupiter:junit-jupiter:5.10.3")
+    implementation("org.junit.jupiter:junit-jupiter:5.11.3")
     implementation("org.reflections:reflections:0.10.2")
     implementation("dev.forst", "ktor-openapi-generator", "0.6.1")
     implementation("io.ktor:ktor-client-serialization:$ktor_version")
