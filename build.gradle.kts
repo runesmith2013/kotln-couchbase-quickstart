@@ -44,7 +44,7 @@ dependencies {
     implementation("io.ktor:ktor-server-cors-jvm:$ktor_version")
 
     testImplementation("io.ktor:ktor-server-tests-jvm:$ktor_version")
-    testImplementation("io.mockk:mockk:1.13.11")
+    testImplementation("io.mockk:mockk:1.13.13")
 }
 
 tasks.withType<Jar> {
