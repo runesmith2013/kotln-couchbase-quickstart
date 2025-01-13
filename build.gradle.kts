@@ -32,7 +32,7 @@ dependencies {
     implementation("io.ktor:ktor-server-content-negotiation:$ktor_version")
     implementation("io.ktor:ktor-serialization-jackson:$ktor_version")
     implementation("ch.qos.logback:logback-classic:$logback_version")
-    implementation("com.couchbase.client:kotlin-client:1.4.0")
+    implementation("com.couchbase.client:kotlin-client:1.4.7")
     implementation("io.insert-koin:koin-ktor:$koin_version")
     implementation("io.insert-koin:koin-logger-slf4j:$koin_version")
     implementation("io.github.config4k:config4k:0.7.0")
